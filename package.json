@@ -1,0 +1,19 @@
+{
+  "name": "daole-backend",
+  "version": "1.0.0",
+  "description": "Backend for daole",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Felix Liu",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "express-session": "^1.12.1",
+    "mongoose": "^4.2.5",
+    "morgan": "^1.6.1",
+    "passport": "^0.3.2"
+  }
+}
