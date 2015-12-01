@@ -1,11 +1,12 @@
 var delivery = require('../controllers/delivery.controller'),
-	passport = require('passport');
+	passport = require('passport'),
+	user = require('../controllers/user.controller');
 
 module.exports = function (app) {
 	app.route('/delivery')
-	.get(passport.authenticate(), delivery.list);
+	.get(user.signin, delivery.list);
 	
 	app.route('/delivery/:deliveryId')
-	.put(passport.authenticate(), delivery.create, delivery.update)
-	.delete(passport.authenticate(), delivery.remove);
+	.put(user.signin, delivery.create, delivery.update)
+	.delete(user.signin, delivery.remove);
 };

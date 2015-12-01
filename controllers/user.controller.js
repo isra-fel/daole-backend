@@ -19,26 +19,22 @@ exports.signup = function (req, res, next) {
 
 exports.signout = function (req, res) {
 	req.logout();
-	res.end();
+	res.status(200).send('sign out ok').end();
 };
 
+/**
+ * Middleware that makes sure req.user is avaliable, otherwise return 401 Unauthorized.
+ * Be sure to prepend it before any middlewares that need authentication.
+ * @param  {any} req
+ * @param  {any} res
+ * @param  {any} next
+ */
 exports.signin = function (req, res, next) {
-	User.findOne({
-		username: req.body.username
-	}, function (err, user) {
-		if (err) {
-			return next(err);
-		} else {
-			if (user.authenticate(req.body.password)) {
-				req.login(user, function (err) {
-					if (err) {
-						return next(err);
-					}
-					return res.json(user);
-				});
-			}
-		}
-	});
+	if (req.user) {
+		return next();
+	} else {
+		res.status(401).send('please signin first').end();
+	}
 };
 
 exports.update = function (req, res, next) {

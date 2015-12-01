@@ -16,7 +16,7 @@
   - output: ?
 
 ### /user/signout
-- POST - signout *
+- GET - signout *
   - output: ?
 
 ### /delivery
