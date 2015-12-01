@@ -5,11 +5,11 @@ module.exports = function () {
 	var User = mongoose.model('User');
 	
 	passport.serializeUser(function (user, done) {
-		done(null, user.username);
+		done(null, user._id);
 	});
-	passport.deserializeUser(function (username, done) {
+	passport.deserializeUser(function (id, done) {
 		User.findOne({
-			username: username
+			_id: id
 		}, '-password -salt', function (err, user) {
 			done(err, user);
 		});

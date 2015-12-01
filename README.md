@@ -2,13 +2,33 @@
 
 ## API
 
-### /user/${username}
-- PUT - register / login
-- *TODO: what about modify & reset password?*
+### /user
+- POST - signup
+  - input: {username, password, email}
+  - output: ?
+- PUT - update password *
+  - input: {password}
+  - output: ?
 
-### /user/${username}/delivery
-- GET - list deliveries
+### /user/signin
+- POST - signin
+  - input: {username, password}
+  - output: ?
 
-### /user/${username}/delivery/${delivery-id}
-- PUT - create / edit delivery
-- DELETE - remove favourite
+### /user/signout
+- POST - signout *
+  - output: ?
+
+### /delivery
+- GET - list deliveries *
+  - output: [{}]
+
+### /delivery/${delivery-id}
+- PUT - create delivery *
+  - input: {company, isPinned, isReceived}
+  - output: ?
+- PUT - edit delivery *
+  - {isPinned} or {isReceived} or both
+- DELETE - remove favourite *
+
+Starred (*) APIs need authentication, the others do not.
