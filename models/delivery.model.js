@@ -14,7 +14,8 @@ var delivery = new Schema({
 	},
 	alias: {
 		type: String,
-		trim: true
+		trim: true,
+		default: ''
 	},
 	username: {
 		type: String,
@@ -23,11 +24,11 @@ var delivery = new Schema({
 	},
 	isPinned: {
 		type: Boolean,
-		required: 'isPinned is required'
+		default: true
 	},
 	isReceived: {
 		type: Boolean,
-		required: 'isPinned is required'
+		default: false
 	}
 });
 

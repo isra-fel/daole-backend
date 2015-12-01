@@ -17,20 +17,32 @@ exports.create = function (req, res, next) {
 			if (err) {
 				return next(err);
 			} else {
-				res.json(delivery);
+				res.status(201).write('Created').end();
 			}
 		});
 	});	
 };
 
-exports.update = function (req, res, next) {
+exports.update = function (req, res, next) {	
 	Delivery.findOneAndUpdate({
 		deliveryId: req.params.deliveryId
-	}, req.body, function (err, delivery) {
+	}, (function extractUpdateBody(body) {
+		var up = {};
+		if (body.hasOwnProperty('alias')) {
+			up.alias = body.alias;
+		}
+		if (body.hasOwnProperty('isPinned')) {
+			up.isPinned = body.isPinned;
+		}
+		if (body.hasOwnProperty('isReceived')) {
+			up.isReceived = body.isReceived;
+		}
+		return up;
+	})(req.body), function (err, delivery) {
 		if (err) {
 			return next(err);
 		} else {
-			res.json(delivery);
+			res.status(200).write('OK').end();
 		}
 	});
 };
@@ -40,15 +52,16 @@ exports.list = function (req, res, next) {
 		if (err) {
 			return next(err);
 		}
-		res.json(deliveries).end();
+		res.status(200).json(deliveries).end();
 	});
 };
 
 exports.remove = function (req, res, next) {
-	req.user.remove(function (err) {
-		if (err) {
-			return next(err);
-		}
-		res.status(200).end();
-	});
+	//TODO: 
+	// req.user.remove(function (err) {
+	// 	if (err) {
+	// 		return next(err);
+	// 	}
+	// 	res.status(200).end();
+	// });
 };
