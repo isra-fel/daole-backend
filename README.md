@@ -35,14 +35,17 @@
   - output:
     - success: 201 Created
     - fail: 409 Conflict, 400 Bad Request
-- PUT - edit delivery *
-  - input: {isPinned} or {isReceived} or {alias}
+- PUT - edit delivery *#
+  - input: {isPinned} or {isReceived} or {alias} (you can edit only one field at a time)
   - output:
     - success: 200 OK
     - fail: 400 Bad Request, 404 Not Found
-- DELETE - remove favourite *
+- DELETE - remove favourite *#
   - output:
     - success: 200 OK
     - fail: 404 Not Found
 
 Starred (*) APIs need authentication, the others do not. If these APIs are called without credentials (session), the server will return a 401 Unauthorized.
+
+APIs with a `#` simbol support batch operations. Simply put a semicolon `;` between the objects that you want to perform the batch operation on. E.g.
+> DELETE /delivery/${delivery-id-0};${delivery-id-1};... 
